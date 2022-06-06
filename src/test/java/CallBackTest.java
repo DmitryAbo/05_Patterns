@@ -16,10 +16,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CallBackTest {
 
-    public String generateDate(int days) {
-        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-    }
-
     @BeforeEach
     public void startBrowser() {
         open("http://localhost:9999/");
@@ -30,20 +26,20 @@ public class CallBackTest {
         UserInfo userInfo = UserDataGenerator.Registration.registrationInfo("ru");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(3));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(3));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//label[@data-test-id=\"agreement\"]").click();
         $x("//span[text()=\"Запланировать\"]/ancestor::button").click();
         $x("//div[text() = 'Встреча успешно запланирована на ']/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
-        $x("//div[text() = \"" + generateDate(3) + "\"]/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
+        $x("//div[text() = \"" + UserDataGenerator.Date.generateDate(3) + "\"]/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(4));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(4));
         $x("//span[text()=\"Запланировать\"]/ancestor::button").click();
         $x("//div[@data-test-id=\"replan-notification\"]").should(visible, Duration.ofSeconds(15));
         $x("//span[text() = \"Перепланировать\"]/ancestor::button").click();
         $x("//div[text() = 'Встреча успешно запланирована на ']/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
-        $x("//div[text() = \"" + generateDate(4) + "\"]/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
+        $x("//div[text() = \"" + UserDataGenerator.Date.generateDate(4) + "\"]/ancestor::div[@data-test-id=\"success-notification\"]").should(visible, Duration.ofSeconds(15));
     }
 
     @Test
@@ -51,7 +47,7 @@ public class CallBackTest {
         UserInfo userInfo = UserDataGenerator.Registration.registrationInfo("ru");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(2));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(2));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//label[@data-test-id=\"agreement\"]").click();
@@ -64,7 +60,7 @@ public class CallBackTest {
         UserInfo userInfo = UserDataGenerator.Registration.registrationInfo("ru");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(2).substring(9));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(2).substring(9));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//label[@data-test-id=\"agreement\"]").click();
@@ -78,7 +74,7 @@ public class CallBackTest {
         UserInfo userInfoEng = UserDataGenerator.Registration.registrationInfo("en");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfoEng.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(3));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(3));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//label[@data-test-id=\"agreement\"]").click();
@@ -92,7 +88,7 @@ public class CallBackTest {
         UserInfo userInfoEng = UserDataGenerator.Registration.registrationInfo("en");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(3));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(3));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfoEng.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//label[@data-test-id=\"agreement\"]").click();
@@ -105,7 +101,7 @@ public class CallBackTest {
         UserInfo userInfo = UserDataGenerator.Registration.registrationInfo("ru");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(3));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(3));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone().substring(3));
         $x("//label[@data-test-id=\"agreement\"]").click();
@@ -118,7 +114,7 @@ public class CallBackTest {
         UserInfo userInfo = UserDataGenerator.Registration.registrationInfo("ru");
         $x("//span/input[@placeholder = 'Город']").setValue(userInfo.getCity());
         $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(generateDate(3));
+        $x("//span[@data-test-id= 'date']//child::input[@placeholder= 'Дата встречи']").setValue(UserDataGenerator.Date.generateDate(3));
         $x("//span[@data-test-id= 'name']//child::input[@name= 'name']").setValue(userInfo.getName());
         $x("//span[@data-test-id= 'phone']//child::input[@name= 'phone']").setValue(userInfo.getPhone());
         $x("//span[text()=\"Запланировать\"]/ancestor::button").click();
