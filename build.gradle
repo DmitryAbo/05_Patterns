@@ -1,10 +1,17 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.9.6'
 }
 
 group 'ru.netology'
 version '1.0-SNAPSHOT'
 
+allure {
+    version = '2.16.1'
+    useJUnit5 {
+        version = '2.16.1'
+    }
+}
 sourceCompatibility = 11
 
 // кодировка файлов (если используете русский язык в файлах)
@@ -24,6 +31,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'com.codeborne:selenide:5.19.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.16.1'
 }
 
 test {

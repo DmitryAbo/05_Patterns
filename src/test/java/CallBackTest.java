@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import ru.netology.generatotrs.UserDataGenerator;
@@ -19,6 +19,16 @@ public class CallBackTest {
     @BeforeEach
     public void startBrowser() {
         open("http://localhost:9999/");
+    }
+
+    @BeforeAll
+    public static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    public static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
     @Test
